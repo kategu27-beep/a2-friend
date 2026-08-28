@@ -64,24 +64,27 @@ def extract_text(api_data: Any) -> str:
     if not isinstance(api_data, dict):
         raise ValueError("Kie AI returned a non-object response")
 
-    output = api_data.get("output")
-    if isinstance(output, list):
-        parts = []
-        for item in output:
-            if not isinstance(item, dict) or item.get("type") != "message":
-                continue
-            content = item.get("content", [])
-            if isinstance(content, list):
-                for part in content:
-                    if (
-                        isinstance(part, dict)
-                        and part.get("type") == "output_text"
-                        and isinstance(part.get("text"), str)
-                    ):
-                        parts.append(part["text"])
-        if parts:
-            return "\n".join(parts)
-    raise ValueError("Could not find output_text in Kie AI message output")
+    output = api_data.get("output", [])
+    if not isinstance(output, list):
+        raise ValueError("Could not find model text in Kie AI response")
+
+    for item in output:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+
+        content = item.get("content", [])
+        if not isinstance(content, list):
+            continue
+
+        for part in content:
+            if (
+                isinstance(part, dict)
+                and part.get("type") == "output_text"
+                and isinstance(part.get("text"), str)
+            ):
+                return part["text"]
+
+    raise ValueError("Could not find model text in Kie AI response")
 
 
 def build_input_text(history: list[dict[str, str]], message: str) -> str:
@@ -90,14 +93,15 @@ def build_input_text(history: list[dict[str, str]], message: str) -> str:
     for item in history:
         label = "User" if item["role"] == "user" else "A2 Friend"
         conversation.append(f"{label}: {item['content']}")
-    conversation.append(f"User: {message}")
-    conversation_text = "\n".join(conversation)
+    conversation_text = "\n".join(conversation) or "No earlier messages."
 
     return (
         f"{SYSTEM_PROMPT}\n\n"
-        "Conversation so far:\n"
+        "Recent conversation:\n"
         f"{conversation_text}\n\n"
-        "Reply to the last User message now. Return only the required JSON."
+        "New message:\n"
+        f"User: {message}\n\n"
+        "Reply to the new message now. Return only the required JSON."
     )
 
 
@@ -182,7 +186,21 @@ def chat():
                 error="A2 Friend cannot answer right now. Please try again."
             ), 502
 
-        answer, mood = parse_model_reply(extract_text(response.json()))
+        result = response.json()
+        app.logger.info(
+            "Kie AI response keys: %s",
+            list(result.keys()) if isinstance(result, dict) else type(result),
+        )
+        try:
+            model_text = extract_text(result)
+        except ValueError:
+            app.logger.error(
+                "Kie AI response did not contain output_text: %s",
+                response.text[:3000],
+            )
+            raise
+
+        answer, mood = parse_model_reply(model_text)
         return jsonify(answer=answer, mood=mood)
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
         app.logger.exception("Kie AI request failed: %s", exc)
