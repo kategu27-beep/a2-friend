@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3b2731">
+  <title>A2 Friend — Your cozy English companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="desk">
+    <div class="sparkles" aria-hidden="true">✦ · ✧ · ✦</div>
+    <section class="book" aria-label="A2 Friend diary">
+      <aside class="page intro-page">
+        <span class="tape tape-top" aria-hidden="true"></span>
+        <div class="brand-mark" aria-hidden="true">♥</div>
+        <p class="eyebrow">MY LITTLE ENGLISH DIARY</p>
+        <h1>A2 Friend<span>✦</span></h1>
+        <p class="tagline">A kind AI friend for simple English chats, bright ideas, and everyday moments.</p>
+
+        <div class="mascot-scene" aria-label="Pip, the A2 Friend mascot">
+          <div class="moon">☾</div>
+          <div class="mascot">
+            <div class="hair"></div><div class="face"></div>
+            <div class="glasses"><i></i><i></i></div><div class="smile"></div>
+            <div class="body"><span>★</span></div>
+          </div>
+          <div class="speech-note">Hi, I'm Pip!<br>Let's chat ✨</div>
+        </div>
+
+        <div class="topic-card">
+          <p>WE CAN TALK ABOUT...</p>
+          <div class="topics"><span>🎵 music</span><span>✈ travel</span><span>🎮 games</span><span>🐾 animals</span><span>🍓 food</span><span>💭 feelings</span></div>
+        </div>
+        <div class="paper-note">You don't need perfect English.<br><strong>Just be you.</strong> ♥</div>
+        <span class="doodle star-one" aria-hidden="true">☆</span>
+        <span class="doodle heart-one" aria-hidden="true">♡</span>
+      </aside>
+
+      <section class="page chat-page">
+        <header class="chat-header">
+          <div>
+            <p class="eyebrow">SATURDAY · TODAY'S PAGE</p>
+            <h2>Today's Diary</h2>
+          </div>
+          <div id="moodBadge" class="mood-badge" title="The mood changes with every answer">
+            <span id="moodEmoji">✨</span>
+            <span><small>MOOD</small><b id="moodText">Friendly</b></span>
+          </div>
+        </header>
+
+        <div id="chatMessages" class="chat-messages" aria-live="polite" aria-label="Conversation">
+          <div class="message friend-message">
+            <div class="mini-avatar" aria-hidden="true">P</div>
+            <div class="bubble">
+              <span class="message-name">A2 FRIEND</span>
+              <p>Hi! 😊<br>What do you want to talk about today?</p>
+              <time>now</time>
+            </div>
+          </div>
+        </div>
+
+        <div id="typing" class="typing" hidden><span></span><span></span><span></span> Writing in the diary... ✍️</div>
+
+        <form id="chatForm" class="composer">
+          <label class="sr-only" for="messageInput">Write a message</label>
+          <textarea id="messageInput" maxlength="4000" rows="1" placeholder="Write anything..." required></textarea>
+          <button id="sendButton" type="submit" aria-label="Send message" title="Send message">
+            <span>➜</span>
+          </button>
+        </form>
+        <p id="statusMessage" class="status-message" role="alert"></p>
+        <div class="page-number">— 02 —</div>
+      </section>
+    </section>
+    <div class="desk-note note-left">Remember:<br>small steps still<br>move you forward ♥</div>
+    <div class="desk-note note-right">Be curious.<br>Be kind.<br>Keep talking ✦</div>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

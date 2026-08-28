@@ -1,0 +1,166 @@
+:root {
+  --ink: #4d2e3a;
+  --muted: #8f6d70;
+  --paper: #f6e7ca;
+  --paper-deep: #e6cda8;
+  --rose: #c7667e;
+  --rose-light: #efc0be;
+  --purple: #78609a;
+  --desk: #39252a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 360px;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Nunito", sans-serif;
+  background:
+    radial-gradient(circle at 14% 20%, #6d3a43 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 60%, #7a4a3d 0 1px, transparent 2px),
+    repeating-linear-gradient(12deg, rgba(255,255,255,.018) 0 2px, transparent 2px 12px),
+    var(--desk);
+}
+
+.desk {
+  min-height: 100vh;
+  padding: 34px clamp(18px, 5vw, 78px) 90px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.sparkles { position: absolute; top: 18px; right: 7%; color: #d8a46c; letter-spacing: 18px; opacity: .7; }
+
+.book {
+  width: min(1180px, 94vw);
+  height: min(790px, calc(100vh - 120px));
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: .82fr 1.18fr;
+  filter: drop-shadow(0 30px 28px rgba(14, 7, 9, .5));
+  position: relative;
+}
+
+.book::before {
+  content: "";
+  position: absolute;
+  inset: -12px -17px -15px;
+  border-radius: 28px 28px 19px 19px;
+  background: #6b3b45;
+  border: 4px solid #29191d;
+  box-shadow: inset 0 0 0 4px #9b5c54;
+  z-index: -2;
+}
+
+.page {
+  min-height: 0;
+  position: relative;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(105,67,46,.08) 0 1px, transparent 1.5px),
+    repeating-linear-gradient(2deg, transparent 0 22px, rgba(111,71,54,.025) 23px);
+  border: 1px solid #c8a781;
+  box-shadow: inset 0 0 45px rgba(116, 72, 42, .16);
+}
+
+.intro-page { border-radius: 18px 3px 4px 14px; padding: 54px 55px 40px; overflow: hidden; }
+.chat-page { border-radius: 3px 18px 14px 4px; padding: 34px 42px 30px; display: flex; flex-direction: column; }
+.intro-page::after, .chat-page::before { content: ""; position: absolute; top: 0; bottom: 0; width: 34px; pointer-events: none; }
+.intro-page::after { right: 0; background: linear-gradient(90deg, transparent, rgba(74,42,32,.18)); }
+.chat-page::before { left: 0; background: linear-gradient(90deg, rgba(74,42,32,.2), transparent); }
+
+.eyebrow { margin: 0 0 4px; color: #a25e72; font-size: 11px; letter-spacing: .15em; font-weight: 800; }
+h1, h2 { font-family: "Caveat", cursive; margin: 0; }
+h1 { font-size: clamp(52px, 6vw, 78px); line-height: .95; transform: rotate(-2deg); }
+h1 span { color: #d68963; font-size: .55em; padding-left: 8px; }
+.tagline { max-width: 390px; margin: 15px 0 18px; line-height: 1.6; font-size: 15px; color: #6d4d53; }
+
+.mascot-scene { height: 245px; position: relative; margin: 6px 0 18px; border-radius: 49% 51% 45% 55%; background: #d9b5b2; overflow: hidden; border: 2px dashed rgba(97,58,68,.28); }
+.moon { position: absolute; font: 60px "Caveat"; right: 42px; top: 20px; color: #fff0c9; transform: rotate(-16deg); }
+.mascot { position: absolute; left: 85px; bottom: 0; width: 170px; height: 220px; }
+.hair { position: absolute; width: 126px; height: 118px; left: 20px; top: 20px; background: #553337; border-radius: 52% 52% 36% 40%; transform: rotate(-4deg); }
+.face { position: absolute; width: 103px; height: 91px; left: 34px; top: 43px; background: #efb891; border-radius: 46% 46% 48% 48%; border: 2px solid #633b3e; }
+.glasses { position: absolute; display: flex; left: 37px; top: 65px; gap: 2px; z-index: 2; }
+.glasses i { width: 43px; height: 38px; border: 4px solid #56353f; border-radius: 50%; background: radial-gradient(circle at 52% 51%, #3b2730 0 4px, #fff9e9 5px 100%); }
+.smile { position: absolute; left: 70px; top: 112px; width: 34px; height: 16px; border-bottom: 4px solid #6e3035; border-radius: 50%; z-index: 2; }
+.body { position: absolute; width: 164px; height: 105px; bottom: -8px; background: #865d9c; border: 3px solid #59354f; border-radius: 50% 50% 8px 8px; text-align: center; color: #f1c15f; font-size: 42px; padding-top: 25px; }
+.speech-note { position: absolute; right: 24px; top: 96px; padding: 12px 15px; background: #fff0d6; box-shadow: 2px 3px 0 rgba(99,58,48,.2); font: 600 20px "Caveat"; transform: rotate(3deg); }
+
+.topic-card { border-top: 2px dashed rgba(94,58,60,.25); padding-top: 12px; }
+.topic-card > p { font-size: 10px; font-weight: 800; letter-spacing: .14em; margin: 0 0 9px; }
+.topics { display: flex; flex-wrap: wrap; gap: 7px; }
+.topics span { background: #efd5c1; padding: 6px 9px; border-radius: 6px 10px 7px 9px; font: 600 15px "Caveat"; transform: rotate(-1deg); }
+.topics span:nth-child(even) { background: #ddd0e2; transform: rotate(1.5deg); }
+.paper-note { position: absolute; right: 26px; bottom: 26px; background: #e8adac; padding: 10px 16px; font: 17px "Caveat"; transform: rotate(-2deg); box-shadow: 2px 5px 8px rgba(69,39,35,.18); }
+.tape { position: absolute; width: 82px; height: 24px; background: rgba(218,189,139,.58); transform: rotate(-5deg); z-index: 3; }
+.tape-top { left: 42%; top: -5px; }
+.brand-mark { position: absolute; right: 42px; top: 45px; font-size: 30px; color: #c85c79; transform: rotate(9deg); }
+.doodle { position: absolute; font: 42px "Caveat"; color: #bb875f; opacity: .7; }
+.star-one { right: 25px; top: 210px; }.heart-one { left: 24px; bottom: 115px; }
+
+.chat-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 0 0 17px 16px; border-bottom: 2px dashed rgba(107,73,66,.2); }
+h2 { font-size: 43px; line-height: 1; }
+.mood-badge { display: flex; align-items: center; gap: 9px; background: #e7c3cf; border: 1px solid #ad788d; border-radius: 12px 17px 11px 15px; padding: 8px 13px; transform: rotate(1deg); transition: transform .25s; }
+.mood-badge > span:first-child { font-size: 24px; }
+.mood-badge small, .mood-badge b { display: block; }.mood-badge small { font-size: 8px; letter-spacing: .15em; }.mood-badge b { font: 600 18px "Caveat"; }
+.mood-pop { animation: moodPop .45s ease; }
+
+.chat-messages { flex: 1; min-height: 0; overflow-y: auto; padding: 22px 10px 12px 18px; scrollbar-color: #c99b93 transparent; scrollbar-width: thin; }
+.message { display: flex; align-items: flex-end; gap: 8px; margin: 0 0 17px; animation: messageIn .35s ease both; }
+.user-message { justify-content: flex-end; }
+.bubble { max-width: 77%; background: #f8dec9; border: 1px solid #d0ac95; border-radius: 18px 18px 18px 5px; padding: 11px 14px 8px; box-shadow: 1px 3px 8px rgba(91,55,49,.09); }
+.user-message .bubble { background: #d9c5dc; border-color: #a98cae; border-radius: 18px 18px 5px 18px; }
+.message-name { display: block; color: #9a607e; font-size: 9px; font-weight: 800; letter-spacing: .09em; margin-bottom: 3px; }
+.bubble p { white-space: pre-wrap; margin: 0; line-height: 1.45; font-size: 14px; }
+.bubble time { display: block; text-align: right; color: #947a79; font-size: 9px; margin-top: 3px; }
+.mini-avatar { flex: 0 0 34px; width: 34px; height: 34px; display: grid; place-items: center; color: white; background: #795281; border-radius: 50%; border: 2px solid #f1c87f; font: 700 17px "Caveat"; }
+.typing { color: #9b6e74; padding: 0 0 8px 20px; font: 16px "Caveat"; }
+.typing span { width: 5px; height: 5px; display: inline-block; background: #a26980; border-radius: 50%; animation: blink 1s infinite alternate; }.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+
+.composer { display: flex; align-items: flex-end; gap: 10px; background: rgba(255,250,232,.8); border: 2px solid #b99378; box-shadow: 3px 5px 0 rgba(81,48,42,.14); border-radius: 10px 16px 12px 14px; padding: 8px 9px 8px 15px; margin-left: 16px; }
+.composer textarea { flex: 1; resize: none; border: 0; outline: 0; background: transparent; min-height: 39px; max-height: 110px; padding: 9px 0 5px; color: var(--ink); font: 600 18px "Caveat"; }
+.composer textarea::placeholder { color: #9b8280; }.composer textarea:disabled { opacity: .65; }
+.composer button { flex: 0 0 45px; width: 45px; height: 45px; border-radius: 12px 16px 12px 14px; border: 2px solid #543751; background: #80609a; color: #fff4d9; box-shadow: 2px 3px 0 #4e3645; cursor: pointer; font-size: 25px; transition: transform .18s, opacity .18s; }
+.composer button:hover { transform: translateY(-2px) rotate(-3deg); }.composer button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.status-message { min-height: 18px; margin: 7px 0 0 20px; color: #a23f4d; font-size: 12px; }
+.page-number { text-align: center; font: 13px "Caveat"; color: #a48777; }
+.desk-note { position: absolute; bottom: 15px; background: #d88998; padding: 12px 20px; font: 19px "Caveat"; color: #4f3038; box-shadow: 4px 6px 9px rgba(12,5,6,.3); }.note-left { left: 8%; transform: rotate(3deg); }.note-right { right: 8%; transform: rotate(-3deg); background: #d6b992; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@keyframes messageIn { from { opacity: 0; transform: translateY(9px) rotate(.5deg); } to { opacity: 1; transform: none; } }
+@keyframes moodPop { 50% { transform: rotate(-2deg) scale(1.08); } }
+@keyframes blink { to { opacity: .25; transform: translateY(-3px); } }
+
+@media (max-width: 800px) {
+  .desk { padding: 12px 8px; display: block; }
+  .book { width: 100%; height: calc(100vh - 24px); min-height: 610px; display: block; }
+  .book::before { inset: -5px; border-radius: 19px; }
+  .intro-page { display: none; }
+  .chat-page { height: 100%; border-radius: 16px; padding: 24px 16px 18px; }
+  .chat-page::before { display: none; }
+  .chat-header { padding-left: 2px; }
+  h2 { font-size: 37px; }
+  .mood-badge { padding: 7px 9px; }
+  .chat-messages { padding-left: 2px; padding-right: 2px; }
+  .bubble { max-width: 84%; }
+  .composer { margin-left: 0; }
+  .desk-note, .sparkles { display: none; }
+}
+
+@media (max-width: 420px) {
+  .chat-page { padding: 18px 11px 12px; }
+  .chat-header { gap: 8px; }
+  .chat-header .eyebrow { font-size: 8px; }
+  h2 { font-size: 32px; }
+  .mood-badge b { font-size: 15px; }
+  .mood-badge > span:first-child { font-size: 20px; }
+  .bubble p { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; }
+}
