@@ -7,15 +7,22 @@ const statusMessage = document.querySelector('#statusMessage');
 const moodEmoji = document.querySelector('#moodEmoji');
 const moodText = document.querySelector('#moodText');
 const moodBadge = document.querySelector('#moodBadge');
+const pipCharacter = document.querySelector('#pipCharacter');
+const pipCaption = document.querySelector('#pipCaption');
 
 const history = [];
 const MAX_HISTORY = 16;
 const moods = {
-  happy: ['😊', 'Happy'], supportive: ['💗', 'Supportive'],
-  calm: ['🌿', 'Calm'], curious: ['🤔', 'Curious'],
-  playful: ['😜', 'Playful'], surprised: ['😮', 'Surprised'],
-  serious: ['🧠', 'Serious'], friendly: ['✨', 'Friendly'],
+  happy: ['😊', 'Happy', 'Pip is happy with you ✨'],
+  supportive: ['💗', 'Supportive', 'Pip is here for you 💗'],
+  calm: ['🌿', 'Calm', "Let's take it easy 🌿"],
+  curious: ['🤔', 'Curious', 'Tell me more 🤔'],
+  playful: ['😜', 'Playful', "Let's have some fun 😜"],
+  surprised: ['😮', 'Surprised', 'Wow! 😮'],
+  serious: ['🧠', 'Serious', "I'm listening carefully."],
+  friendly: ['✨', 'Friendly', "Let's chat ✨"],
 };
+const moodNames = Object.keys(moods);
 
 function timeNow() {
   return new Intl.DateTimeFormat([], { hour: '2-digit', minute: '2-digit' }).format(new Date());
@@ -50,9 +57,12 @@ function addMessage(role, content) {
 
 function updateMood(mood) {
   const normalized = Object.hasOwn(moods, mood) ? mood : 'friendly';
-  const [emoji, label] = moods[normalized];
+  const [emoji, label, caption] = moods[normalized];
   moodEmoji.textContent = emoji;
   moodText.textContent = label;
+  pipCaption.textContent = caption;
+  pipCharacter.classList.remove(...moodNames);
+  pipCharacter.classList.add(normalized);
   moodBadge.dataset.mood = normalized;
   moodBadge.classList.remove('mood-pop');
   requestAnimationFrame(() => moodBadge.classList.add('mood-pop'));
