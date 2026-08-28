@@ -10,7 +10,7 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
-DEFAULT_KIE_MODEL = "gpt-4o-mini"
+DEFAULT_KIE_MODEL = "gpt-5.4-codex"
 KIE_API_URL = os.getenv("KIE_API_URL", "https://api.kie.ai/api/v1/responses")
 ALLOWED_MOODS = {
     "happy", "supportive", "calm", "curious", "playful",
@@ -60,37 +60,45 @@ def clean_history(value: Any) -> list[dict[str, str]]:
 
 
 def extract_text(api_data: Any) -> str:
-    """Extract model text from common Responses and chat-completions shapes."""
+    """Extract output_text from Kie AI's Responses API message output."""
     if not isinstance(api_data, dict):
         raise ValueError("Kie AI returned a non-object response")
-
-    if isinstance(api_data.get("output_text"), str):
-        return api_data["output_text"]
 
     output = api_data.get("output")
     if isinstance(output, list):
         parts = []
         for item in output:
-            if not isinstance(item, dict):
+            if not isinstance(item, dict) or item.get("type") != "message":
                 continue
             content = item.get("content", [])
             if isinstance(content, list):
                 for part in content:
-                    if isinstance(part, dict) and isinstance(part.get("text"), str):
+                    if (
+                        isinstance(part, dict)
+                        and part.get("type") == "output_text"
+                        and isinstance(part.get("text"), str)
+                    ):
                         parts.append(part["text"])
         if parts:
             return "\n".join(parts)
+    raise ValueError("Could not find output_text in Kie AI message output")
 
-    choices = api_data.get("choices")
-    if isinstance(choices, list) and choices:
-        message = choices[0].get("message", {}) if isinstance(choices[0], dict) else {}
-        if isinstance(message.get("content"), str):
-            return message["content"]
 
-    nested = api_data.get("data")
-    if isinstance(nested, dict):
-        return extract_text(nested)
-    raise ValueError("Could not find model text in Kie AI response")
+def build_input_text(history: list[dict[str, str]], message: str) -> str:
+    """Combine instructions and conversation into one Responses API input."""
+    conversation = []
+    for item in history:
+        label = "User" if item["role"] == "user" else "A2 Friend"
+        conversation.append(f"{label}: {item['content']}")
+    conversation.append(f"User: {message}")
+    conversation_text = "\n".join(conversation)
+
+    return (
+        f"{SYSTEM_PROMPT}\n\n"
+        "Conversation so far:\n"
+        f"{conversation_text}\n\n"
+        "Reply to the last User message now. Return only the required JSON."
+    )
 
 
 def parse_model_reply(raw_text: str) -> tuple[str, str]:
@@ -137,7 +145,7 @@ def chat():
     api_key = os.getenv("KIE_API_KEY")
     if not api_key:
         app.logger.error("KIE_API_KEY is not set")
-        return jsonify(error="A2 Friend is not ready yet. Please try again later."), 503
+        return jsonify(error="A2 Friend cannot answer right now. Please try again."), 503
 
     history = clean_history(data.get("history"))
     # The current message is sent separately, so avoid duplicating it.
@@ -146,15 +154,34 @@ def chat():
 
     payload = {
         "model": os.getenv("KIE_MODEL", DEFAULT_KIE_MODEL),
-        "input": [{"role": "system", "content": SYSTEM_PROMPT}, *history,
-                  {"role": "user", "content": message}],
-        "temperature": 0.7,
+        "stream": False,
+        "input": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_text",
+                        "text": build_input_text(history, message),
+                    }
+                ],
+            }
+        ],
+        "reasoning": {"effort": "low"},
     }
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
     try:
         response = requests.post(KIE_API_URL, headers=headers, json=payload, timeout=45)
-        response.raise_for_status()
+        if response.status_code != 200:
+            app.logger.error(
+                "Kie AI error %s: %s",
+                response.status_code,
+                response.text,
+            )
+            return jsonify(
+                error="A2 Friend cannot answer right now. Please try again."
+            ), 502
+
         answer, mood = parse_model_reply(extract_text(response.json()))
         return jsonify(answer=answer, mood=mood)
     except (requests.RequestException, ValueError, json.JSONDecodeError) as exc:
