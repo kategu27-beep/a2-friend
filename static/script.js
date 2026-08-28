@@ -36,7 +36,10 @@ function addMessage(role, content) {
     const avatar = document.createElement('div');
     avatar.className = 'mini-avatar';
     avatar.setAttribute('aria-hidden', 'true');
-    avatar.textContent = 'P';
+    const avatarImage = document.createElement('img');
+    avatarImage.src = '/static/assets/pip-character.png';
+    avatarImage.alt = '';
+    avatar.appendChild(avatarImage);
     row.appendChild(avatar);
   }
 

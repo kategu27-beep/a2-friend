@@ -25,17 +25,7 @@
           <div class="character-glow" aria-hidden="true"></div>
           <div class="moon" aria-hidden="true">☾</div>
           <div class="emotion-symbol" aria-hidden="true">✦</div>
-          <div class="mascot">
-            <div class="hair"><i class="hair-lock hair-lock-left"></i><i class="hair-lock hair-lock-right"></i></div>
-            <div class="ear ear-left"></div><div class="ear ear-right"></div>
-            <div class="face">
-              <div class="brows"><i></i><i></i></div>
-              <div class="glasses"><i><b></b></i><i><b></b></i></div>
-              <div class="nose"></div><div class="cheek cheek-left"></div><div class="cheek cheek-right"></div>
-              <div class="smile"></div>
-            </div>
-            <div class="body"><span>★</span></div>
-          </div>
+          <img class="pip-art" src="{{ url_for('static', filename='assets/pip-character.png') }}" alt="Pip smiling in her star sweater">
           <div class="speech-note"><strong>Hi, I'm Pip!</strong><br><span id="pipCaption">Let's chat ✨</span></div>
         </div>
 
@@ -62,7 +52,7 @@
 
         <div id="chatMessages" class="chat-messages" aria-live="polite" aria-label="Conversation">
           <div class="message friend-message">
-            <div class="mini-avatar" aria-hidden="true">P</div>
+            <div class="mini-avatar" aria-hidden="true"><img src="{{ url_for('static', filename='assets/pip-character.png') }}" alt=""></div>
             <div class="bubble">
               <span class="message-name">A2 FRIEND</span>
               <p>Hi! 😊<br>What do you want to talk about today?</p>
