@@ -158,38 +158,39 @@ h2 { font-size: 43px; line-height: 1; }
 /* Illustrated edition: live UI carefully layered over the generated diary art. */
 body { background: #24130f; }
 .desk {
-  padding: 2.5vh 2vw 7vh;
+  padding: 16px;
   background:
     radial-gradient(ellipse at center, transparent 35%, rgba(17,7,6,.62) 100%),
     linear-gradient(rgba(51,25,20,.2), rgba(29,13,12,.42));
 }
 .book {
-  width: min(1460px, 98vw);
-  height: min(940px, 91vh);
-  min-height: 680px;
+  width: min(1500px, calc(100vw - 32px), calc((100vh - 32px) * 1.5));
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 3 / 2;
   grid-template-columns: 1fr 1fr;
-  padding: 6.5% 8.5% 8% 12.2%;
+  padding: 8.2% 9.2% 9.4% 13.4%;
   background: url("/static/assets/enchanted-diary.png") center / 100% 100% no-repeat;
   filter: drop-shadow(0 34px 34px rgba(8,3,2,.55));
 }
 .book::before { display: none; }
 .page {
   border: 0;
-  background: rgba(250,231,194,.08);
+  background: transparent;
   box-shadow: none;
   backdrop-filter: none;
 }
-.intro-page { border-radius: 0; padding: 15px clamp(24px, 3vw, 48px) 8px 12px; overflow: visible; }
-.chat-page { border-radius: 0; padding: 10px 8px 6px clamp(28px, 3vw, 48px); }
+.intro-page { border-radius: 0; padding: 0 clamp(22px, 2.5vw, 42px) 0 0; overflow: visible; }
+.chat-page { border-radius: 0; padding: 0 0 0 clamp(26px, 2.8vw, 46px); overflow: hidden; }
 .intro-page::after, .chat-page::before { display: none; }
 .intro-page .eyebrow { color: #9a6174; }
-h1 { font-size: clamp(54px, 5vw, 76px); text-shadow: 0 2px 0 rgba(255,255,255,.4); }
-.tagline { margin: 8px 0 4px; font: 600 19px/1.25 "Caveat", cursive; max-width: 330px; }
+h1 { font-size: clamp(48px, 4.6vw, 72px); text-shadow: 0 2px 0 rgba(255,255,255,.4); }
+.tagline { margin: 6px 0 2px; font: 600 clamp(17px, 1.35vw, 21px)/1.2 "Caveat", cursive; max-width: 340px; }
 
 .mascot-scene {
-  height: min(39vh, 355px);
-  min-height: 260px;
-  margin: -6px 0 5px;
+  height: min(37vh, 340px);
+  min-height: 235px;
+  margin: 0 0 4px;
   overflow: visible;
   border: 0;
   border-radius: 40%;
@@ -201,10 +202,10 @@ h1 { font-size: clamp(54px, 5vw, 76px); text-shadow: 0 2px 0 rgba(255,255,255,.4
 .pip-art {
   position: absolute;
   z-index: 2;
-  left: -28px;
-  bottom: -9px;
-  width: min(340px, 75%);
-  height: 110%;
+  left: -12px;
+  bottom: -4px;
+  width: min(325px, 72%);
+  height: 105%;
   object-fit: contain;
   object-position: left bottom;
   filter: drop-shadow(0 13px 10px rgba(69,35,29,.25));
@@ -212,25 +213,33 @@ h1 { font-size: clamp(54px, 5vw, 76px); text-shadow: 0 2px 0 rgba(255,255,255,.4
 }
 .moon { right: 8%; top: 8%; color: #967099; opacity: .45; }
 .emotion-symbol { left: 2%; top: 8%; }
-.speech-note { right: -2px; top: 32%; min-width: 138px; max-width: 165px; padding: 12px 15px; font-size: 19px; transform: rotate(2deg); }
+.speech-note { right: 0; top: 31%; min-width: 136px; max-width: 170px; padding: 12px 15px; font-size: 18px; transform: rotate(1deg); border: 1px solid rgba(150,104,79,.2); }
 .character.happy .pip-art { animation: pipBounce .65s ease; }
 .character.curious .pip-art { animation: pipTilt 1.8s ease-in-out infinite; }
 .character.playful .pip-art { animation: pipWiggle 1.5s ease-in-out infinite; }
 .character.surprised .pip-art { animation: pipPop .45s ease; }
 .character.happy .mascot, .character.curious .mascot, .character.playful .mascot, .character.surprised .mascot { animation: none; }
-.topic-card { position: relative; z-index: 5; margin-top: -3px; padding-top: 7px; }
-.topics { gap: 5px; }.topics span { padding: 4px 8px; font-size: 14px; box-shadow: 0 2px 3px rgba(70,40,34,.08); }
-.paper-note { right: 8px; bottom: -36px; z-index: 8; }
+.topic-card { position: relative; z-index: 5; margin-top: 0; padding-top: 8px; }
+.topics { gap: 5px; flex-wrap: nowrap; }.topics span { padding: 4px 7px; font-size: clamp(12px, .95vw, 14px); box-shadow: 0 2px 3px rgba(70,40,34,.08); white-space: nowrap; transform: none; }
+.topics span:nth-child(even) { transform: none; }
+.paper-note { right: 0; bottom: -5px; z-index: 8; transform: rotate(-1deg); }
 
-.chat-header { padding: 0 5px 12px 4px; }
-.chat-messages { padding: 17px 8px 8px 7px; }
+.chat-header { min-height: 76px; padding: 0 2px 12px 0; }
+.chat-header h2 { font-size: clamp(36px, 3.3vw, 50px); }
+.mood-badge { flex: 0 0 auto; transform: none; padding: 8px 13px; background: #e6bed0; box-shadow: 0 3px 0 rgba(102,62,74,.13); }
+.chat-messages { padding: 15px 5px 8px 2px; }
+.message { margin-bottom: 14px; }
 .bubble {
-  background: rgba(250,218,197,.79);
-  border: 1px solid rgba(157,103,91,.42);
-  box-shadow: 0 5px 12px rgba(79,45,40,.1), inset 0 1px rgba(255,255,255,.35);
-  backdrop-filter: blur(2px);
+  max-width: 88%;
+  background: #f3d9c5;
+  border: 1px solid #d5ad96;
+  box-shadow: 0 3px 0 rgba(120,77,66,.1);
+  backdrop-filter: none;
+  border-radius: 16px 16px 16px 5px;
+  padding: 10px 14px 8px;
 }
-.user-message .bubble { background: rgba(211,191,218,.86); }
+.user-message .bubble { min-width: 132px; max-width: 82%; background: #d9c5dd; border-color: #b69bb9; border-radius: 16px 16px 5px 16px; }
+.bubble p { font-size: clamp(13px, 1vw, 15px); line-height: 1.4; }
 .mini-avatar {
   overflow: hidden;
   padding: 0;
@@ -239,8 +248,9 @@ h1 { font-size: clamp(54px, 5vw, 76px); text-shadow: 0 2px 0 rgba(255,255,255,.4
   box-shadow: 0 3px 7px rgba(68,38,35,.2);
 }
 .mini-avatar img { width: 150%; height: 150%; object-fit: cover; object-position: 50% 10%; transform: translate(-16%, 2%); }
-.composer { background: rgba(255,244,218,.86); backdrop-filter: blur(3px); }
-.desk-note { bottom: 1.2vh; }
+.composer { margin-left: 0; background: #fff0cf; backdrop-filter: none; border: 2px solid #b48c70; border-radius: 14px; box-shadow: 0 4px 0 rgba(94,56,48,.12); }
+.status-message { margin-left: 4px; }
+.desk-note, .sparkles { display: none; }
 
 @keyframes messageIn { from { opacity: 0; transform: translateY(9px) rotate(.5deg); } to { opacity: 1; transform: none; } }
 @keyframes moodPop { 50% { transform: rotate(-2deg) scale(1.08); } }
@@ -256,7 +266,7 @@ h1 { font-size: clamp(54px, 5vw, 76px); text-shadow: 0 2px 0 rgba(255,255,255,.4
   .book { width: 100%; height: calc(100vh - 24px); min-height: 610px; display: block; padding: 0; background: none; filter: drop-shadow(0 18px 22px rgba(8,3,2,.45)); }
   .book::before { inset: -5px; border-radius: 19px; }
   .intro-page { display: none; }
-  .chat-page { height: 100%; border-radius: 16px; padding: 24px 16px 18px; background-color: var(--paper); background-image: radial-gradient(circle at 25% 25%, rgba(105,67,46,.08) 0 1px, transparent 1.5px), repeating-linear-gradient(2deg, transparent 0 22px, rgba(111,71,54,.025) 23px); box-shadow: inset 0 0 45px rgba(116,72,42,.16); }
+  .chat-page { height: 100%; border-radius: 16px; padding: 24px 16px 18px; background-color: var(--paper); background-image: linear-gradient(rgba(250,232,198,.08), rgba(250,232,198,.08)), url("/static/assets/enchanted-diary.png"); background-position: center, 66% center; background-size: auto, auto 112%; background-repeat: no-repeat; box-shadow: inset 0 0 45px rgba(116,72,42,.16), 0 0 0 2px #4a2830; }
   .chat-page::before { display: none; }
   .chat-header { padding-left: 2px; }
   h2 { font-size: 37px; }
