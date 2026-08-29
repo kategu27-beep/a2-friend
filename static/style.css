@@ -1,292 +1,59 @@
-:root {
-  --ink: #4d2e3a;
-  --muted: #8f6d70;
-  --paper: #f6e7ca;
-  --paper-deep: #e6cda8;
-  --rose: #c7667e;
-  --rose-light: #efc0be;
-  --purple: #78609a;
-  --desk: #39252a;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-width: 360px;
-  min-height: 100vh;
-  color: var(--ink);
-  font-family: "Nunito", sans-serif;
-  background:
-    radial-gradient(circle at 14% 20%, #6d3a43 0 1px, transparent 2px),
-    radial-gradient(circle at 80% 60%, #7a4a3d 0 1px, transparent 2px),
-    repeating-linear-gradient(12deg, rgba(255,255,255,.018) 0 2px, transparent 2px 12px),
-    var(--desk);
-}
-
-.desk {
-  min-height: 100vh;
-  padding: 34px clamp(18px, 5vw, 78px) 90px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-.sparkles { position: absolute; top: 18px; right: 7%; color: #d8a46c; letter-spacing: 18px; opacity: .7; }
-
-.book {
-  width: min(1180px, 94vw);
-  height: min(790px, calc(100vh - 120px));
-  min-height: 640px;
-  display: grid;
-  grid-template-columns: .82fr 1.18fr;
-  filter: drop-shadow(0 30px 28px rgba(14, 7, 9, .5));
-  position: relative;
-}
-
-.book::before {
-  content: "";
-  position: absolute;
-  inset: -12px -17px -15px;
-  border-radius: 28px 28px 19px 19px;
-  background: #6b3b45;
-  border: 4px solid #29191d;
-  box-shadow: inset 0 0 0 4px #9b5c54;
-  z-index: -2;
-}
-
-.page {
-  min-height: 0;
-  position: relative;
-  background-color: var(--paper);
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(105,67,46,.08) 0 1px, transparent 1.5px),
-    repeating-linear-gradient(2deg, transparent 0 22px, rgba(111,71,54,.025) 23px);
-  border: 1px solid #c8a781;
-  box-shadow: inset 0 0 45px rgba(116, 72, 42, .16);
-}
-
-.intro-page { border-radius: 18px 3px 4px 14px; padding: 54px 55px 40px; overflow: hidden; }
-.chat-page { border-radius: 3px 18px 14px 4px; padding: 34px 42px 30px; display: flex; flex-direction: column; }
-.intro-page::after, .chat-page::before { content: ""; position: absolute; top: 0; bottom: 0; width: 34px; pointer-events: none; }
-.intro-page::after { right: 0; background: linear-gradient(90deg, transparent, rgba(74,42,32,.18)); }
-.chat-page::before { left: 0; background: linear-gradient(90deg, rgba(74,42,32,.2), transparent); }
-
-.eyebrow { margin: 0 0 4px; color: #a25e72; font-size: 11px; letter-spacing: .15em; font-weight: 800; }
-h1, h2 { font-family: "Caveat", cursive; margin: 0; }
-h1 { font-size: clamp(52px, 6vw, 78px); line-height: .95; transform: rotate(-2deg); }
-h1 span { color: #d68963; font-size: .55em; padding-left: 8px; }
-.tagline { max-width: 390px; margin: 15px 0 18px; line-height: 1.6; font-size: 15px; color: #6d4d53; }
-
-.mascot-scene { --glow: rgba(255,207,112,.38); height: 245px; position: relative; margin: 6px 0 18px; border-radius: 49% 51% 45% 55%; background: linear-gradient(145deg, #dab4b2, #bfa8ca); overflow: hidden; border: 2px dashed rgba(97,58,68,.28); isolation: isolate; }
-.mascot-scene::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 22% 28%, rgba(255,245,211,.55) 0 2px, transparent 3px), radial-gradient(circle at 76% 72%, rgba(255,245,211,.42) 0 1px, transparent 2px); background-size: 52px 47px, 37px 41px; opacity: .7; }
-.character-glow { position: absolute; width: 190px; height: 190px; left: 73px; bottom: 5px; border-radius: 50%; background: var(--glow); filter: blur(14px); transition: background .4s; }
-.moon { position: absolute; font: 52px "Caveat"; right: 39px; top: 12px; color: #fff0c9; transform: rotate(-16deg); opacity: .72; }
-.emotion-symbol { position: absolute; left: 31px; top: 32px; z-index: 5; color: #fff0b1; font: 700 31px "Caveat"; filter: drop-shadow(0 2px 1px rgba(78,43,53,.25)); transition: transform .3s; }
-.mascot { position: absolute; left: 73px; bottom: 0; width: 180px; height: 224px; transform-origin: 50% 100%; }
-.hair { position: absolute; width: 139px; height: 137px; left: 20px; top: 13px; z-index: 1; background: linear-gradient(135deg, #654044, #35262e 72%); border: 3px solid #4b3037; border-radius: 52% 52% 38% 40%; transform: rotate(-3deg); box-shadow: inset 12px 3px 0 rgba(255,255,255,.08); }
-.hair::after { content: ""; position: absolute; left: 16px; top: 5px; width: 69px; height: 48px; border-radius: 60% 30% 60% 20%; border-top: 9px solid #805157; transform: rotate(-8deg); }
-.hair-lock { position: absolute; display: block; width: 27px; height: 76px; top: 50px; background: #493038; border-radius: 70% 30% 60% 40%; }.hair-lock-left { left: -7px; transform: rotate(8deg); }.hair-lock-right { right: -8px; transform: rotate(-8deg); }
-.ear { position: absolute; width: 24px; height: 30px; top: 76px; z-index: 2; background: #e7a982; border: 2px solid #633b3e; border-radius: 50%; }.ear-left { left: 17px; }.ear-right { right: 17px; }
-.face { position: absolute; width: 110px; height: 101px; left: 35px; top: 39px; z-index: 2; background: linear-gradient(145deg, #f5c29b, #e7a47f); border-radius: 46% 46% 48% 48%; border: 2px solid #633b3e; }
-.brows { position: absolute; display: flex; gap: 39px; left: 19px; top: 20px; z-index: 4; }.brows i { width: 18px; height: 6px; border-top: 3px solid #57343a; border-radius: 50%; transition: transform .3s; }
-.glasses { position: absolute; display: flex; left: 7px; top: 27px; gap: 0; z-index: 3; }
-.glasses::after { content: ""; position: absolute; width: 9px; border-top: 3px solid #56353f; left: 43px; top: 18px; }
-.glasses i { position: relative; width: 47px; height: 42px; border: 4px solid #56353f; border-radius: 50%; background: #fff9e9; box-shadow: inset 6px 5px 0 rgba(214,225,222,.5); overflow: hidden; transition: height .25s, margin-top .25s; }
-.glasses b { position: absolute; width: 9px; height: 12px; left: 18px; top: 14px; background: #3b2730; border-radius: 50%; box-shadow: 2px 1px 0 #fff; transition: transform .28s, height .28s; }
-.nose { position: absolute; left: 49px; top: 57px; width: 9px; height: 8px; border-right: 2px solid #be765f; border-bottom: 2px solid #be765f; border-radius: 50%; }
-.cheek { position: absolute; width: 16px; height: 8px; top: 67px; border-radius: 50%; background: rgba(205,98,94,.27); }.cheek-left { left: 9px; }.cheek-right { right: 9px; }
-.smile { position: absolute; left: 39px; top: 75px; width: 31px; height: 14px; border-bottom: 4px solid #74333b; border-radius: 50%; z-index: 2; transition: all .28s; }
-.body { position: absolute; width: 172px; height: 105px; bottom: -8px; left: 4px; z-index: 1; background: linear-gradient(135deg, #a64568, #74528d); border: 3px solid #59354f; border-radius: 50% 50% 8px 8px; text-align: center; color: #f4ca58; font-size: 48px; padding-top: 22px; box-shadow: inset 12px 5px 0 rgba(255,255,255,.08); }
-.body span { display: inline-block; filter: drop-shadow(2px 2px 0 #bd6e57); transform: rotate(-7deg); }
-.speech-note { position: absolute; right: 19px; top: 89px; z-index: 6; min-width: 137px; padding: 11px 14px; background: #fff0d6; box-shadow: 2px 3px 0 rgba(99,58,48,.2); font: 600 18px "Caveat"; line-height: 1.08; transform: rotate(3deg); }
-.speech-note::before { content: ""; position: absolute; left: -10px; bottom: 13px; border-width: 7px 11px 7px 0; border-style: solid; border-color: transparent #fff0d6 transparent transparent; }
-.speech-note strong { color: #8e4e69; font-weight: 700; }
-
-/* Pip's face and tiny magical details follow the mood returned by the AI. */
-.character.happy { --glow: rgba(255,205,80,.55); }.character.happy .emotion-symbol::before { content: "✦ ✧"; }.character.happy .emotion-symbol { font-size: 0; }.character.happy .emotion-symbol::before { font-size: 29px; }.character.happy .smile { left: 35px; width: 39px; height: 20px; border-width: 0 0 5px; }.character.happy .mascot { animation: pipBounce .65s ease; }
-.character.supportive { --glow: rgba(237,132,165,.5); }.character.supportive .emotion-symbol::before { content: "♥"; }.character.supportive .emotion-symbol { font-size: 0; color: #d75f7d; }.character.supportive .emotion-symbol::before { font-size: 31px; }.character.supportive .smile { width: 27px; left: 41px; height: 11px; }.character.supportive .character-glow { animation: pipGlow 2.8s ease-in-out infinite; }
-.character.calm { --glow: rgba(126,181,164,.42); }.character.calm .emotion-symbol::before { content: "☾"; }.character.calm .emotion-symbol { font-size: 0; }.character.calm .emotion-symbol::before { font-size: 35px; }.character.calm .glasses b { height: 3px; top: 20px; border-radius: 50%; }
-.character.curious { --glow: rgba(158,129,202,.47); }.character.curious .emotion-symbol::before { content: "?"; }.character.curious .emotion-symbol { font-size: 0; }.character.curious .emotion-symbol::before { font-size: 38px; }.character.curious .brows i:first-child { transform: translateY(-5px) rotate(-9deg); }.character.curious .glasses b { transform: translateX(3px); }.character.curious .mascot { animation: pipTilt 1.8s ease-in-out infinite; }
-.character.playful { --glow: rgba(235,129,181,.48); }.character.playful .emotion-symbol::before { content: "★"; }.character.playful .emotion-symbol { font-size: 0; color: #f7ce5c; }.character.playful .emotion-symbol::before { font-size: 31px; }.character.playful .glasses i:first-child b { height: 3px; top: 20px; }.character.playful .smile { transform: rotate(-6deg); }.character.playful .mascot { animation: pipWiggle 1.5s ease-in-out infinite; }
-.character.surprised { --glow: rgba(255,177,93,.57); }.character.surprised .emotion-symbol::before { content: "✷"; }.character.surprised .emotion-symbol { font-size: 0; }.character.surprised .emotion-symbol::before { font-size: 35px; }.character.surprised .glasses b { transform: scale(1.25); }.character.surprised .smile { left: 46px; top: 77px; width: 17px; height: 17px; border: 3px solid #74333b; background: #9d4850; }.character.surprised .mascot { animation: pipPop .45s ease; }
-.character.serious { --glow: rgba(111,128,159,.35); }.character.serious .brows i:first-child { transform: rotate(10deg); }.character.serious .brows i:last-child { transform: rotate(-10deg); }.character.serious .smile { left: 40px; top: 84px; width: 30px; height: 0; border-radius: 0; }.character.serious .emotion-symbol { opacity: .35; }
-.character.friendly { --glow: rgba(255,207,112,.38); }
-
-.topic-card { border-top: 2px dashed rgba(94,58,60,.25); padding-top: 12px; }
-.topic-card > p { font-size: 10px; font-weight: 800; letter-spacing: .14em; margin: 0 0 9px; }
-.topics { display: flex; flex-wrap: wrap; gap: 7px; }
-.topics span { background: #efd5c1; padding: 6px 9px; border-radius: 6px 10px 7px 9px; font: 600 15px "Caveat"; transform: rotate(-1deg); }
-.topics span:nth-child(even) { background: #ddd0e2; transform: rotate(1.5deg); }
-.paper-note { position: absolute; right: 26px; bottom: 26px; background: #e8adac; padding: 10px 16px; font: 17px "Caveat"; transform: rotate(-2deg); box-shadow: 2px 5px 8px rgba(69,39,35,.18); }
-.tape { position: absolute; width: 82px; height: 24px; background: rgba(218,189,139,.58); transform: rotate(-5deg); z-index: 3; }
-.tape-top { left: 42%; top: -5px; }
-.brand-mark { position: absolute; right: 42px; top: 45px; font-size: 30px; color: #c85c79; transform: rotate(9deg); }
-.doodle { position: absolute; font: 42px "Caveat"; color: #bb875f; opacity: .7; }
-.star-one { right: 25px; top: 210px; }.heart-one { left: 24px; bottom: 115px; }
-
-.chat-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 0 0 17px 16px; border-bottom: 2px dashed rgba(107,73,66,.2); }
-h2 { font-size: 43px; line-height: 1; }
-.mood-badge { display: flex; align-items: center; gap: 9px; background: #e7c3cf; border: 1px solid #ad788d; border-radius: 12px 17px 11px 15px; padding: 8px 13px; transform: rotate(1deg); transition: transform .25s; }
-.mood-badge > span:first-child { font-size: 24px; }
-.mood-badge small, .mood-badge b { display: block; }.mood-badge small { font-size: 8px; letter-spacing: .15em; }.mood-badge b { font: 600 18px "Caveat"; }
-.mood-pop { animation: moodPop .45s ease; }
-
-.chat-messages { flex: 1; min-height: 0; overflow-y: auto; padding: 22px 10px 12px 18px; scrollbar-color: #c99b93 transparent; scrollbar-width: thin; }
-.message { display: flex; align-items: flex-end; gap: 8px; margin: 0 0 17px; animation: messageIn .35s ease both; }
-.user-message { justify-content: flex-end; }
-.bubble { max-width: 77%; background: #f8dec9; border: 1px solid #d0ac95; border-radius: 18px 18px 18px 5px; padding: 11px 14px 8px; box-shadow: 1px 3px 8px rgba(91,55,49,.09); }
-.user-message .bubble { background: #d9c5dc; border-color: #a98cae; border-radius: 18px 18px 5px 18px; }
-.message-name { display: block; color: #9a607e; font-size: 9px; font-weight: 800; letter-spacing: .09em; margin-bottom: 3px; }
-.bubble p { white-space: pre-wrap; margin: 0; line-height: 1.45; font-size: 14px; }
-.bubble time { display: block; text-align: right; color: #947a79; font-size: 9px; margin-top: 3px; }
-.mini-avatar { flex: 0 0 34px; width: 34px; height: 34px; display: grid; place-items: center; color: white; background: #795281; border-radius: 50%; border: 2px solid #f1c87f; font: 700 17px "Caveat"; }
-.typing { color: #9b6e74; padding: 0 0 8px 20px; font: 16px "Caveat"; }
-.typing span { width: 5px; height: 5px; display: inline-block; background: #a26980; border-radius: 50%; animation: blink 1s infinite alternate; }.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
-
-.composer { display: flex; align-items: flex-end; gap: 10px; background: rgba(255,250,232,.8); border: 2px solid #b99378; box-shadow: 3px 5px 0 rgba(81,48,42,.14); border-radius: 10px 16px 12px 14px; padding: 8px 9px 8px 15px; margin-left: 16px; }
-.composer textarea { flex: 1; resize: none; border: 0; outline: 0; background: transparent; min-height: 39px; max-height: 110px; padding: 9px 0 5px; color: var(--ink); font: 600 18px "Caveat"; }
-.composer textarea::placeholder { color: #9b8280; }.composer textarea:disabled { opacity: .65; }
-.composer button { flex: 0 0 45px; width: 45px; height: 45px; border-radius: 12px 16px 12px 14px; border: 2px solid #543751; background: #80609a; color: #fff4d9; box-shadow: 2px 3px 0 #4e3645; cursor: pointer; font-size: 25px; transition: transform .18s, opacity .18s; }
-.composer button:hover { transform: translateY(-2px) rotate(-3deg); }.composer button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-.status-message { min-height: 18px; margin: 7px 0 0 20px; color: #a23f4d; font-size: 12px; }
-.page-number { text-align: center; font: 13px "Caveat"; color: #a48777; }
-.desk-note { position: absolute; bottom: 15px; background: #d88998; padding: 12px 20px; font: 19px "Caveat"; color: #4f3038; box-shadow: 4px 6px 9px rgba(12,5,6,.3); }.note-left { left: 8%; transform: rotate(3deg); }.note-right { right: 8%; transform: rotate(-3deg); background: #d6b992; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-/* Illustrated edition: live UI carefully layered over the generated diary art. */
-body { background: #24130f; }
-.desk {
-  padding: 16px;
-  background:
-    radial-gradient(ellipse at center, transparent 35%, rgba(17,7,6,.62) 100%),
-    linear-gradient(rgba(51,25,20,.2), rgba(29,13,12,.42));
-}
-.book {
-  width: min(1500px, calc(100vw - 32px), calc((100vh - 32px) * 1.5));
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 3 / 2;
-  grid-template-columns: 1fr 1fr;
-  padding: 8.2% 9.2% 9.4% 13.4%;
-  background: url("/static/assets/enchanted-diary.png") center / 100% 100% no-repeat;
-  filter: drop-shadow(0 34px 34px rgba(8,3,2,.55));
-}
-.book::before { display: none; }
-.page {
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-.intro-page { border-radius: 0; padding: 0 clamp(22px, 2.5vw, 42px) 0 0; overflow: visible; }
-.chat-page { border-radius: 0; padding: 0 0 0 clamp(26px, 2.8vw, 46px); overflow: hidden; }
-.intro-page::after, .chat-page::before { display: none; }
-.intro-page .eyebrow { color: #9a6174; }
-h1 { font-size: clamp(48px, 4.6vw, 72px); text-shadow: 0 2px 0 rgba(255,255,255,.4); }
-.tagline { margin: 6px 0 2px; font: 600 clamp(17px, 1.35vw, 21px)/1.2 "Caveat", cursive; max-width: 340px; }
-
-.mascot-scene {
-  height: min(37vh, 340px);
-  min-height: 235px;
-  margin: 0 0 4px;
-  overflow: visible;
-  border: 0;
-  border-radius: 40%;
-  background: transparent;
-  isolation: isolate;
-}
-.mascot-scene::before { display: none; }
-.character-glow { width: 250px; height: 250px; left: 5px; bottom: 4px; z-index: -1; filter: blur(28px); }
-.pip-art {
-  position: absolute;
-  z-index: 2;
-  left: -12px;
-  bottom: -4px;
-  width: min(325px, 72%);
-  height: 105%;
-  object-fit: contain;
-  object-position: left bottom;
-  filter: drop-shadow(0 13px 10px rgba(69,35,29,.25));
-  transform-origin: 50% 100%;
-}
-.moon { right: 8%; top: 8%; color: #967099; opacity: .45; }
-.emotion-symbol { left: 2%; top: 8%; }
-.speech-note { right: 0; top: 31%; min-width: 136px; max-width: 170px; padding: 12px 15px; font-size: 18px; transform: rotate(1deg); border: 1px solid rgba(150,104,79,.2); }
-.character.happy .pip-art { animation: pipBounce .65s ease; }
-.character.curious .pip-art { animation: pipTilt 1.8s ease-in-out infinite; }
-.character.playful .pip-art { animation: pipWiggle 1.5s ease-in-out infinite; }
-.character.surprised .pip-art { animation: pipPop .45s ease; }
-.character.happy .mascot, .character.curious .mascot, .character.playful .mascot, .character.surprised .mascot { animation: none; }
-.topic-card { position: relative; z-index: 5; margin-top: 0; padding-top: 8px; }
-.topics { gap: 5px; flex-wrap: nowrap; }.topics span { padding: 4px 7px; font-size: clamp(12px, .95vw, 14px); box-shadow: 0 2px 3px rgba(70,40,34,.08); white-space: nowrap; transform: none; }
-.topics span:nth-child(even) { transform: none; }
-.paper-note { right: 0; bottom: -5px; z-index: 8; transform: rotate(-1deg); }
-
-.chat-header { min-height: 76px; padding: 0 2px 12px 0; }
-.chat-header h2 { font-size: clamp(36px, 3.3vw, 50px); }
-.mood-badge { flex: 0 0 auto; transform: none; padding: 8px 13px; background: #e6bed0; box-shadow: 0 3px 0 rgba(102,62,74,.13); }
-.chat-messages { padding: 15px 5px 8px 2px; }
-.message { margin-bottom: 14px; }
-.bubble {
-  max-width: 88%;
-  background: #f3d9c5;
-  border: 1px solid #d5ad96;
-  box-shadow: 0 3px 0 rgba(120,77,66,.1);
-  backdrop-filter: none;
-  border-radius: 16px 16px 16px 5px;
-  padding: 10px 14px 8px;
-}
-.user-message .bubble { min-width: 132px; max-width: 82%; background: #d9c5dd; border-color: #b69bb9; border-radius: 16px 16px 5px 16px; }
-.bubble p { font-size: clamp(13px, 1vw, 15px); line-height: 1.4; }
-.mini-avatar {
-  overflow: hidden;
-  padding: 0;
-  background: #e9c5ad;
-  border: 2px solid #be836a;
-  box-shadow: 0 3px 7px rgba(68,38,35,.2);
-}
-.mini-avatar img { width: 150%; height: 150%; object-fit: cover; object-position: 50% 10%; transform: translate(-16%, 2%); }
-.composer { margin-left: 0; background: #fff0cf; backdrop-filter: none; border: 2px solid #b48c70; border-radius: 14px; box-shadow: 0 4px 0 rgba(94,56,48,.12); }
-.status-message { margin-left: 4px; }
-.desk-note, .sparkles { display: none; }
-
-@keyframes messageIn { from { opacity: 0; transform: translateY(9px) rotate(.5deg); } to { opacity: 1; transform: none; } }
-@keyframes moodPop { 50% { transform: rotate(-2deg) scale(1.08); } }
-@keyframes blink { to { opacity: .25; transform: translateY(-3px); } }
-@keyframes pipBounce { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-8px) scale(1.02); } 70% { transform: translateY(1px); } }
-@keyframes pipGlow { 0%, 100% { opacity: .65; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.06); } }
-@keyframes pipTilt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(2.5deg); } }
-@keyframes pipWiggle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(2deg); } }
-@keyframes pipPop { 0% { transform: scale(.9); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
-
-@media (max-width: 800px) {
-  .desk { padding: 12px 8px; display: block; }
-  .book { width: 100%; height: calc(100vh - 24px); min-height: 610px; display: block; padding: 0; background: none; filter: drop-shadow(0 18px 22px rgba(8,3,2,.45)); }
-  .book::before { inset: -5px; border-radius: 19px; }
-  .intro-page { display: none; }
-  .chat-page { height: 100%; border-radius: 16px; padding: 24px 16px 18px; background-color: var(--paper); background-image: linear-gradient(rgba(250,232,198,.08), rgba(250,232,198,.08)), url("/static/assets/enchanted-diary.png"); background-position: center, 66% center; background-size: auto, auto 112%; background-repeat: no-repeat; box-shadow: inset 0 0 45px rgba(116,72,42,.16), 0 0 0 2px #4a2830; }
-  .chat-page::before { display: none; }
-  .chat-header { padding-left: 2px; }
-  h2 { font-size: 37px; }
-  .mood-badge { padding: 7px 9px; }
-  .chat-messages { padding-left: 2px; padding-right: 2px; }
-  .bubble { max-width: 84%; }
-  .composer { margin-left: 0; }
-  .desk-note, .sparkles { display: none; }
-}
-
-@media (max-width: 420px) {
-  .chat-page { padding: 18px 11px 12px; }
-  .chat-header { gap: 8px; }
-  .chat-header .eyebrow { font-size: 8px; }
-  h2 { font-size: 32px; }
-  .mood-badge b { font-size: 15px; }
-  .mood-badge > span:first-child { font-size: 20px; }
-  .bubble p { font-size: 13px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; }
-}
+:root { --ink:#4d2e3a; --paper:#f6e7ca; --rose:#c7667e; --purple:#78609a; }
+* { box-sizing:border-box; }
+html,body { margin:0; min-width:360px; min-height:100%; }
+body { color:var(--ink); font-family:"Nunito",sans-serif; background:#2b1722; overflow-x:hidden; }
+.desk { min-height:100vh; display:grid; place-items:center; padding:12px; overflow:hidden; background:radial-gradient(circle at 50% 42%,#593044 0,#291620 70%); }
+.book { position:relative; width:min(96vw,1500px,calc(150vh - 36px)); aspect-ratio:3/2; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:4%; padding:8.5% 12.5%; overflow:hidden; background:url("/static/assets/enchanted-diary.png") center/100% 100% no-repeat; filter:drop-shadow(0 24px 25px rgba(12,4,8,.48)); }
+.page { min-width:0; min-height:0; background:transparent; }
+.left-page { display:grid; grid-template-rows:auto minmax(0,1fr) auto; gap:clamp(5px,.65vw,10px); position:relative; }
+.eyebrow { margin:0 0 2px; color:#9b6076; font-size:clamp(8px,.72vw,11px); font-weight:800; letter-spacing:.14em; }
+h1,h2 { margin:0; font-family:"Caveat",cursive; }
+h1 { font-size:clamp(36px,4vw,64px); line-height:.92; white-space:nowrap; transform:rotate(-1deg); }
+h1 span { padding-left:5px; color:#d48a66; font-size:.55em; }
+.tagline { margin:5px 0 0; color:#6e4d55; font:600 clamp(13px,1.25vw,19px)/1.2 "Caveat",cursive; }
+.mascot-scene { --glow:rgba(255,207,112,.38); min-width:0; min-height:0; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(105px,.65fr); align-items:center; gap:clamp(4px,.7vw,11px); position:relative; }
+.character-glow { position:absolute; left:7%; bottom:5%; width:58%; aspect-ratio:1; border-radius:50%; background:var(--glow); filter:blur(25px); pointer-events:none; }
+.pip-art { z-index:1; display:block; width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; object-position:center bottom; filter:drop-shadow(0 7px 7px rgba(72,38,36,.2)); transform-origin:50% 100%; }
+.speech-note { z-index:2; width:100%; padding:clamp(8px,.8vw,12px); background:#fff0d6; border:1px solid rgba(148,101,78,.28); box-shadow:2px 3px 0 rgba(99,58,48,.14); font:600 clamp(13px,1.15vw,18px)/1.12 "Caveat",cursive; transform:rotate(1deg); }
+.speech-note strong { color:#8e4e69; }
+.moon,.emotion-symbol,.doodle,.brand-mark,.tape { position:absolute; pointer-events:none; }
+.moon { right:28%; top:5%; color:#9b7aa2; font:42px "Caveat"; opacity:.42; }
+.emotion-symbol { left:2%; top:7%; z-index:3; color:#d57791; font:700 28px "Caveat"; }
+.brand-mark { right:3%; top:2%; color:#c85c79; font-size:22px; }
+.tape { width:64px; height:18px; left:42%; top:-5px; background:rgba(218,189,139,.48); transform:rotate(-4deg); }
+.doodle { color:#b68163; opacity:.45; font:30px "Caveat"; }
+.star-one { right:2%; top:34%; }.heart-one { left:1%; bottom:18%; }
+.left-footer { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(110px,.8fr); align-items:end; gap:clamp(7px,.8vw,12px); }
+.topic-card { min-width:0; padding-top:6px; border-top:1px dashed rgba(94,58,60,.28); }
+.topic-card>p { margin:0 0 5px; font-size:clamp(7px,.65vw,10px); font-weight:800; letter-spacing:.12em; }
+.topics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
+.topics span { min-width:0; padding:4px 5px; overflow:hidden; border-radius:7px; background:#efd5c1; box-shadow:0 2px 2px rgba(70,40,34,.08); font:600 clamp(10px,.76vw,13px)/1.1 "Caveat",cursive; text-align:center; white-space:nowrap; }
+.topics span:nth-child(even) { background:#ddd0e2; }
+.paper-note { width:100%; padding:clamp(7px,.7vw,10px); background:#e7aeb3; box-shadow:2px 4px 5px rgba(69,39,35,.15); font:600 clamp(11px,.9vw,15px)/1.2 "Caveat",cursive; transform:rotate(-1deg); }
+.right-page { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+.chat-header { flex:0 0 auto; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding:0 0 clamp(7px,.7vw,11px); border-bottom:1px dashed rgba(107,73,66,.24); }
+.chat-header h2 { font-size:clamp(32px,3vw,50px); line-height:.95; white-space:nowrap; }
+.mood-badge { flex:0 0 auto; display:flex; align-items:center; gap:7px; max-width:42%; padding:6px 9px; border:1px solid #ad788d; border-radius:11px; background:#e6bed0; box-shadow:0 3px 0 rgba(102,62,74,.1); transition:transform .25s; }
+.mood-badge>span:first-child { font-size:clamp(17px,1.5vw,23px); }
+.mood-badge small,.mood-badge b { display:block; }.mood-badge small { font-size:7px; letter-spacing:.13em; }.mood-badge b { overflow:hidden; font:600 clamp(13px,1.1vw,17px) "Caveat"; text-overflow:ellipsis; white-space:nowrap; }
+.mood-pop { animation:moodPop .4s ease; }.mobile-brand { display:none; }
+.chat-area { flex:1 1 auto; width:100%; min-height:0; padding:clamp(8px,1vw,15px) 3px 7px; overflow-x:hidden; overflow-y:auto; scrollbar-color:#c99b93 transparent; scrollbar-width:thin; }
+.message { display:flex; align-items:flex-end; gap:7px; width:100%; margin-bottom:clamp(8px,.8vw,13px); animation:messageIn .3s ease both; }.user-message { justify-content:flex-end; }
+.bubble { max-width:80%; padding:clamp(7px,.7vw,10px) clamp(9px,.85vw,13px) 6px; border:1px solid #d5ad96; border-radius:15px 15px 15px 5px; background:#f3d9c5; box-shadow:0 3px 0 rgba(120,77,66,.08); }
+.user-message .bubble { max-width:70%; min-width:90px; border-color:#b69bb9; border-radius:15px 15px 5px 15px; background:#d9c5dd; }
+.message-name { display:block; margin-bottom:2px; color:#9a607e; font-size:clamp(7px,.58vw,9px); font-weight:800; letter-spacing:.08em; }
+.bubble p { margin:0; font-size:clamp(11px,.93vw,14px); line-height:1.38; white-space:pre-wrap; overflow-wrap:anywhere; }.bubble time { display:block; margin-top:2px; color:#947a79; font-size:8px; text-align:right; }
+.mini-avatar { flex:0 0 clamp(32px,2.5vw,40px); width:clamp(32px,2.5vw,40px); height:clamp(32px,2.5vw,40px); overflow:hidden; border:2px solid #be836a; border-radius:50%; background:#e9c5ad; box-shadow:0 2px 5px rgba(68,38,35,.18); }
+.mini-avatar img { width:150%; height:150%; object-fit:cover; object-position:50% 10%; transform:translate(-16%,2%); }
+.typing { flex:0 0 auto; padding:0 0 5px 5px; color:#9b6e74; font:14px "Caveat"; }.typing span { display:inline-block; width:4px; height:4px; border-radius:50%; background:#a26980; animation:blink 1s infinite alternate; }.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+.input-area { flex:0 0 auto; width:100%; min-width:0; }.composer { display:flex; align-items:flex-end; width:100%; gap:8px; padding:6px 7px 6px 12px; border:2px solid #b48c70; border-radius:12px; background:#fff0cf; box-shadow:0 3px 0 rgba(94,56,48,.1); }
+.composer textarea { flex:1 1 auto; min-width:0; min-height:36px; max-height:90px; padding:8px 0 4px; resize:none; border:0; outline:0; color:var(--ink); background:transparent; font:600 clamp(15px,1.15vw,18px) "Caveat"; }.composer textarea::placeholder{color:#9b8280}.composer textarea:disabled{opacity:.65}
+.composer button { flex:0 0 40px; width:40px; height:40px; padding:0; cursor:pointer; border:2px solid #543751; border-radius:11px; color:#fff4d9; background:#80609a; box-shadow:2px 2px 0 #4e3645; font-size:22px; transition:transform .18s,opacity .18s; }.composer button:hover{transform:translateY(-1px)}.composer button:disabled{cursor:not-allowed;opacity:.45;transform:none}
+.status-message { min-height:14px; margin:3px 2px 0; color:#a23f4d; font-size:10px; }.page-number { margin-top:-2px; color:#a48777; font:11px "Caveat"; text-align:center; }
+.character.happy{--glow:rgba(255,205,80,.52)}.character.happy .pip-art{animation:pipBounce .6s ease}.character.supportive{--glow:rgba(237,132,165,.47)}.character.supportive .character-glow{animation:pipGlow 2.8s ease-in-out infinite}.character.calm{--glow:rgba(126,181,164,.4)}.character.calm .emotion-symbol{color:#759a91}.character.curious{--glow:rgba(158,129,202,.44)}.character.curious .pip-art{animation:pipTilt 1.8s ease-in-out infinite}.character.playful{--glow:rgba(235,129,181,.46)}.character.playful .pip-art{animation:pipWiggle 1.5s ease-in-out infinite}.character.surprised{--glow:rgba(255,177,93,.54)}.character.surprised .pip-art{animation:pipPop .4s ease}.character.serious{--glow:rgba(111,128,159,.32)}.character.serious .emotion-symbol{opacity:.4}.character.friendly{--glow:rgba(255,207,112,.38)}
+.desk-note,.sparkles{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes messageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes moodPop{50%{transform:scale(1.06)}}@keyframes blink{to{opacity:.25;transform:translateY(-2px)}}@keyframes pipBounce{0%,100%{transform:translateY(0)}48%{transform:translateY(-6px)}}@keyframes pipGlow{0%,100%{opacity:.65;transform:scale(.96)}50%{opacity:1;transform:scale(1.05)}}@keyframes pipTilt{0%,100%{transform:rotate(0)}50%{transform:rotate(2deg)}}@keyframes pipWiggle{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1.5deg)}}@keyframes pipPop{0%{transform:scale(.94)}65%{transform:scale(1.04)}100%{transform:scale(1)}}
+@media(max-width:899px) and (min-width:701px){.book{gap:3.5%;padding:8% 11.5%}.left-footer{grid-template-columns:1fr;gap:5px}.paper-note{display:none}.mascot-scene{grid-template-columns:1.25fr .75fr}.speech-note{font-size:11px}.chat-header{gap:5px}.mood-badge{padding:4px 6px}.composer button{flex-basis:34px;width:34px;height:34px}}
+@media(max-width:700px){.desk{display:block;min-height:100dvh;padding:8px;background:#34202a}.book{width:100%;height:calc(100dvh - 16px);min-height:580px;aspect-ratio:auto;display:block;padding:0;background:none;filter:drop-shadow(0 14px 18px rgba(8,3,2,.4))}.left-page{display:none}.right-page{width:100%;height:100%;padding:18px 12px 12px;border:2px solid #6a3c49;border-radius:16px;background:linear-gradient(rgba(249,230,193,.12),rgba(249,230,193,.12)),url("/static/assets/enchanted-diary.png") 66% center/auto 112% no-repeat;box-shadow:inset 0 0 36px rgba(116,72,42,.14)}.chat-header{align-items:center}.chat-header>div:nth-child(2){display:none}.mobile-brand{display:flex;align-items:center;gap:8px;color:var(--ink);font:700 25px "Caveat"}.mobile-brand img{width:40px;height:40px;object-fit:cover;object-position:50% 15%;border:2px solid #b47978;border-radius:50%;background:#e8c8ae}.mood-badge{max-width:50%}.chat-area{padding-top:12px}.bubble{max-width:84%}.user-message .bubble{max-width:76%}.bubble p{font-size:13px}.composer textarea{font-size:17px}}
+@media(max-width:390px){.right-page{padding:13px 9px 9px}.mobile-brand{font-size:22px}.mobile-brand img{width:35px;height:35px}.mood-badge{padding:5px 7px}.mood-badge>span:first-child{font-size:17px}.mini-avatar{flex-basis:32px;width:32px;height:32px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important}}

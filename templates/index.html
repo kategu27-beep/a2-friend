@@ -14,7 +14,7 @@
   <main class="desk">
     <div class="sparkles" aria-hidden="true">✦ · ✧ · ✦</div>
     <section class="book" aria-label="A2 Friend diary">
-      <aside class="page intro-page">
+      <aside class="page intro-page left-page">
         <span class="tape tape-top" aria-hidden="true"></span>
         <div class="brand-mark" aria-hidden="true">♥</div>
         <p class="eyebrow">MY LITTLE ENGLISH DIARY</p>
@@ -29,17 +29,23 @@
           <div class="speech-note"><strong>Hi, I'm Pip!</strong><br><span id="pipCaption">Let's chat ✨</span></div>
         </div>
 
-        <div class="topic-card">
-          <p>WE CAN TALK ABOUT...</p>
-          <div class="topics"><span>🎵 music</span><span>✈ travel</span><span>🎮 games</span><span>🐾 animals</span><span>🍓 food</span><span>💭 feelings</span></div>
+        <div class="left-footer">
+          <div class="topic-card">
+            <p>WE CAN TALK ABOUT...</p>
+            <div class="topics"><span>🎵 music</span><span>✈ travel</span><span>🎮 games</span><span>🐾 animals</span><span>🍓 food</span><span>💭 feelings</span></div>
+          </div>
+          <div class="paper-note">You don't need perfect English.<br><strong>Just be you.</strong> ♥</div>
         </div>
-        <div class="paper-note">You don't need perfect English.<br><strong>Just be you.</strong> ♥</div>
         <span class="doodle star-one" aria-hidden="true">☆</span>
         <span class="doodle heart-one" aria-hidden="true">♡</span>
       </aside>
 
-      <section class="page chat-page">
+      <section class="page chat-page right-page">
         <header class="chat-header">
+          <div class="mobile-brand" aria-hidden="true">
+            <img src="{{ url_for('static', filename='assets/pip-character.png') }}" alt="">
+            <span>A2 Friend</span>
+          </div>
           <div>
             <p class="eyebrow">SATURDAY · TODAY'S PAGE</p>
             <h2>Today's Diary</h2>
@@ -50,7 +56,7 @@
           </div>
         </header>
 
-        <div id="chatMessages" class="chat-messages" aria-live="polite" aria-label="Conversation">
+        <div id="chatMessages" class="chat-messages chat-area" aria-live="polite" aria-label="Conversation">
           <div class="message friend-message">
             <div class="mini-avatar" aria-hidden="true"><img src="{{ url_for('static', filename='assets/pip-character.png') }}" alt=""></div>
             <div class="bubble">
@@ -63,15 +69,17 @@
 
         <div id="typing" class="typing" hidden><span></span><span></span><span></span> Writing in the diary... ✍️</div>
 
-        <form id="chatForm" class="composer">
-          <label class="sr-only" for="messageInput">Write a message</label>
-          <textarea id="messageInput" maxlength="4000" rows="1" placeholder="Write anything..." required></textarea>
-          <button id="sendButton" type="submit" aria-label="Send message" title="Send message">
-            <span>➜</span>
-          </button>
-        </form>
-        <p id="statusMessage" class="status-message" role="alert"></p>
-        <div class="page-number">— 02 —</div>
+        <div class="input-area">
+          <form id="chatForm" class="composer">
+            <label class="sr-only" for="messageInput">Write a message</label>
+            <textarea id="messageInput" maxlength="4000" rows="1" placeholder="Write anything..." required></textarea>
+            <button id="sendButton" type="submit" aria-label="Send message" title="Send message">
+              <span>➜</span>
+            </button>
+          </form>
+          <p id="statusMessage" class="status-message" role="alert"></p>
+          <div class="page-number">— 02 —</div>
+        </div>
       </section>
     </section>
     <div class="desk-note note-left">Remember:<br>small steps still<br>move you forward ♥</div>
